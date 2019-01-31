@@ -1,6 +1,4 @@
-# **开发实践**
-
----
+# 4. 开发实践
 
 本章主要描述开发过程中一些比较固定的实践技巧，写代码时可以直接套用
 
@@ -14,7 +12,7 @@
 
 单例对象应该使用线程安全的模式创建共享的实例。
 
-```
+```text
 + (instancetype)sharedInstance {
    static id sharedInstance = nil;
    static dispatch_once_t onceToken;
@@ -33,7 +31,7 @@
 
 **推荐：**
 
-```
+```text
 NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
 NSDictionary *productManagers = @{@"iPhone" : @"Kate", @"iPad" : @"Kamal", @"Mobile Web" : @"Bill"};
 NSNumber *shouldUseLiterals = @YES;
@@ -42,7 +40,7 @@ NSNumber *buildingZIPCode = @10018;
 
 **反对：**
 
-```
+```text
 NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul", nil];
 NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Kate", @"iPhone", @"Kamal", @"iPad", @"Bill", @"Mobile Web", nil];
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
@@ -57,7 +55,7 @@ NSNumber *buildingZIPCode = [NSNumber numberWithInteger:10018];
 
 **推荐：**
 
-```
+```text
 CGRect frame = self.view.frame;
 CGFloat x = CGRectGetMinX(frame);
 CGFloat y = CGRectGetMinY(frame);
@@ -67,7 +65,7 @@ CGFloat height = CGRectGetHeight(frame);
 
 **反对：**
 
-```
+```text
 CGRect frame = self.view.frame;
 CGFloat x = frame.origin.x;
 CGFloat y = frame.origin.y;
@@ -78,10 +76,9 @@ CGFloat height = frame.size.height;
 ## **常量**
 
 * 定义常量时，除非明确的需要将常量当成宏使用，否则优先使用`const`，而非`#define`
-
 * 只在某一个特定文件里面使用的常量，用`static`
 
-```
+```text
     static CGFloat const RWImageThumbnailHeight = 50.0;
 ```
 
@@ -89,7 +86,7 @@ CGFloat height = frame.size.height;
 
 当使用`enum`时，建议使用新的基础类型规范，因为它具有更强的类型检查和代码补全功能。现在 SDK 包含了一个宏来鼓励使用新的基础类型`NS_ENUM`
 
-```
+```text
 typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
     NYTAdRequestStateLoading
@@ -100,7 +97,7 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
 
 当用到位掩码时，建议使用`NS_OPTIONS`类型的宏
 
-```
+```text
 typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
     NYTAdCategoryAutos      = 1 << 0,
     NYTAdCategoryJobs       = 1 << 1,
@@ -113,7 +110,7 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 
 私有属性应该声明在类实现文件的延展（匿名的类目）中。有名字的类目（例如`ASMPrivate`或`private`）永远都不应该使用，除非要扩展其他类。
 
-```
+```text
 @interface NYTAdvertisement ()
 
 @property (nonatomic, strong) GADBannerView *googleAdView;
@@ -126,16 +123,14 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 ## **布尔值**
 
 * Objective-C的布尔值只使用`YES`和`NO`
-
 * `true`和`false`只能用于CoreFoundation，C或C++的代码中
-
 * 禁止将某个值或表达式的结果与`YES`进行比较
 
   > 因为BOOL被定义成signed char。这意味着除了YES\(1\)和NO\(0\)以外，它还可能是其他值。（32位系统）
   >
   > **因此C或C++中的非0为真并不一定就是YES**
 
-```
+```text
     //以下都是被禁止的
     - (BOOL)isBold {
         return [self fontTraits] & NSFontBoldTrait;
@@ -170,7 +165,7 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 
 * 虽然`nil`会被直接解释成`NO`，但还是建议在条件判断时保持与nil的比较，因为这样代码更直观。
 
-```
+```text
     //比如，更直观的代码
     if (someObject != nil) {
         //...
@@ -188,13 +183,13 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
 
 * 如果某个`BOOL`类型的property的名字是一个形容词，建议为getter方法加上一个"is"开头的别名。
 
-```
+```text
     @property (assign, getter = isEditable) BOOL editable;
 ```
 
 * 在方法实现中，如果有block参数，要注意检测block参数为nil的情况。
 
-```
+```text
     - (void)exitWithCompletion:(void(^)(void))completion {
         // 错误。 如果外部调用此方法时completion传入nil，此处会发生EXC_BAD_ACCESS
         completion();
@@ -205,6 +200,4 @@ typedef NS_OPTIONS(NSUInteger, NYTAdCategory) {
         }
     }
 ```
-
-
 

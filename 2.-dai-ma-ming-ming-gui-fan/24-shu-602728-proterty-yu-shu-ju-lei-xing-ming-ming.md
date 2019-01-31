@@ -1,6 +1,4 @@
-# **属性\(Property\)与数据类型命名**
-
----
+# 2.4. 属性\(Property\)与数据类型命名
 
 这一节描述属性，实例变量，常量，异常以及通知的命名约定。
 
@@ -8,20 +6,20 @@
 
 属性声明的命名大体上和访问方法的命名是一致的。假如属性是动词或名词，格式如下
 
-```
+```text
 @property (...) typenounOrVerb;
 ```
 
 例如：
 
-```
+```text
 @property (strong) NSString *title;
 @property (assign) BOOL showsAlpha;
 ```
 
 如果属性是形容词，名字去掉"is"前缀，但是要特别说明一下符合规范的get访问方法，例如
 
-```
+```text
 @property (assign, getter=isEditable) BOOL editable;
 ```
 
@@ -29,7 +27,7 @@
 
 确保实例变量名简明扼要地描述了它所代表的属性。通常，你应该使用访问方法，而不是直接访问实例变量（除了在init或者dealloc方法里）。为了便于标识实例变量，在名字前面加个下划线"\_"，例如:
 
-```
+```text
 @implementation MyClass {
     BOOL _showsTitle;
 }
@@ -45,12 +43,12 @@
 
 常量命名规则根据常量创建的方式不同而不同。
 
-### ~~**枚举常量 **~~**\(Deprecated\)**
+### ~~**枚举常量**~~ **\(Deprecated\)**
 
 * 使用枚举来定义一组相关的整数常量
 * ￼￼￼￼枚举常量与其 `typedef` 命名遵守函数命名规则。如:来自 NSMatrix.h 中的例子
 
-```
+```text
 typedef enum _NSMatrixMode {
     NSRadioModeMatrix        = 0,
     NSHighlightModeMatrix    = 1,
@@ -61,7 +59,7 @@ typedef enum _NSMatrixMode {
 
 * 位掩码常量可以使用不具名枚举。如:
 
-```
+```text
 enum {
     NSBorderlessWindowMask      = 0,
     NSTitledWindowMask          = 1 << 0,
@@ -76,30 +74,30 @@ enum {
 * 尽量用`const`来修饰浮点数常数，以及彼此没有关联的整数常量（否则使用枚举）
 * const常量命名范例：
 
-```
+```text
 const float NSLightGray;
 ```
 
-枚举常量命名规则与[函数命名](/2/23.md)规则相同。
+枚举常量命名规则与[函数命名](23.md)规则相同。
 
 ### **其他常量**
 
 * 通常不使用 `#define` 来创建常量。如上面所述，整数常量请使用枚举，浮点数常量请使用`const`
 * 使用大写字母来定义预处理编译宏。如：
 
-```
+```text
 #ifdef  DEBUG
 ```
 
 * 编译器定义的宏名首尾都有双下划线。 如：
 
-```
+```text
 __MACH__
 ```
 
 * 为 notification 名及 dictionary key 定义字符串常量,从而能够利用编译器的拼写检查,减少书写错误。Cocoa 框架提供了很多这样的范例:
 
-```
+```text
 APPKIT_EXTERN NSString *NSPrintCopies;
 ```
 
@@ -115,13 +113,13 @@ APPKIT_EXTERN NSString *NSPrintCopies;
 
 异常由具有如下形式的全局 NSString 对象标识:
 
-```
+```text
 [Prefix] + UniquePartOfName + Exception
 ```
 
 UniquePartOfName 部分是有连续的首字符大写的单词组成。例如:
 
-```
+```text
 NSColorListIOException
 NSColorListNotEditableException
 NSDraggingException
@@ -135,18 +133,16 @@ NSIllegalSelectorException
 
 通知由具有如下形式的全局 NSString 对象标识:
 
-```
+```text
 [相关联类的名称] + [Did 或 Will] + [UniquePartOfName] + Notification
 ```
 
 例如:
 
-```
+```text
 NSApplicationDidBecomeActiveNotification
 NSWindowDidMiniaturizeNotification
 NSTextViewDidChangeSelectionNotification
 NSColorPanelColorDidChangeNotification
 ```
-
-
 

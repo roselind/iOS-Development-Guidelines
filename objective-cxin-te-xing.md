@@ -1,22 +1,20 @@
 # Objective-C新特性
 
----
-
-## Modules {#Modules}
+## Modules <a id="Modules"></a>
 
 新的编译符号`@import`
 
-```
+```text
 @import UIKit.UIView;
 ```
 
 编译优化，避免编译时重复引用，增加编译速度。
 
-## Nullability {#Nullability}
+## Nullability <a id="Nullability"></a>
 
 常规用法
 
-```
+```text
 @property (nonatomic, strong, nonnull) Sark *sark;
 @property (nonatomic, copy, readonly, nullable) NSArray *friends;
 + (nullable NSString *)friendWithName:(nonnull NSString *)name;
@@ -24,19 +22,19 @@
 
 修饰变量，前面需要加下划线，比如 block 内用法：
 
-```
+```text
 - (void)startWithCompletionBlock:(nullable void (^)(NSError * _Nullable error))block;
 ```
 
 setter 用法，参见 UIViewController 中的 view 属性，它可以被设成 nil，但是调用 getter 时会触发 -loadView 从而创建并返回一个非 nil 的 view。
 
-```
+```text
 @property (null_resettable, nonatomic, strong) UIView *view;
 ```
 
 Audited Regions宏的用法（包在宏里面的对象默认加 `nonnull` 修饰符，只需要把 `nullable` 的指出来就行）：
 
-```
+```text
 NS_ASSUME_NONNULL_BEGIN
 @interface Sark : NSObject
 @property (nonatomic, copy, nullable) NSString *workingCompany;
@@ -54,11 +52,11 @@ NS_ASSUME_NONNULL_END
 * 对于复杂的指针类型（如 `id *`）必须显式去指定是 `nonnull` 还是 `nullable`。例如，指定一个指向 `nullable` 对象的 `nonnull` 指针，可以使用`__nullable id * __nonnull`；
 * 我们经常使用的 `NSError **` 通常是被假定为一个指向 `nullable` NSError 对象的`nullable` 指针。
 
-## \_\_kindof {#kindof}
+## \_\_kindof <a id="kindof"></a>
 
 主要作用还是编译器层面的类型检查
 
-```
+```text
 //UIView 的写法
 @property (nonatomic, readonly, copy) NSArray<__kindof UIView *> *subviews;
 
@@ -66,18 +64,18 @@ NS_ASSUME_NONNULL_END
 - (nullable __kindof UITableViewCell *)dequeueReusableCellWithIdentifier:(NSString *)identifier;
 ```
 
-## 泛型 {#轻量级的泛型}
+## 泛型 <a id="&#x8F7B;&#x91CF;&#x7EA7;&#x7684;&#x6CDB;&#x578B;"></a>
 
-### 带泛型的容器 {#带泛型的容器}
+### 带泛型的容器 <a id="&#x5E26;&#x6CDB;&#x578B;&#x7684;&#x5BB9;&#x5668;"></a>
 
-```
+```text
 NSArray<NSString *> *strings = @[@"sun", @"yuan"];
 NSDictionary<NSString *, NSNumber *> *mapping = @{@"a": @1, @"b": @2};
 ```
 
-### 自定义泛型 {#自定义泛型}
+### 自定义泛型 <a id="&#x81EA;&#x5B9A;&#x4E49;&#x6CDB;&#x578B;"></a>
 
-```
+```text
 @interface Stack<ObjectType> : NSObject
 - (void)pushObject:(ObjectType)object;
 - (ObjectType)popObject;
@@ -87,7 +85,7 @@ NSDictionary<NSString *, NSNumber *> *mapping = @{@"a": @1, @"b": @2};
 
 还可以增加限制
 
-```
+```text
 // 只接受 NSNumber * 的泛型
 @interface Stack<ObjectType: NSNumber *> : NSObject
 // 只接受满足 NSCopying 协议的泛型
@@ -101,7 +99,7 @@ NSDictionary<NSString *, NSNumber *> *mapping = @{@"a": @1, @"b": @2};
 
 参考 NSArray 和 NSMutableArray 的定义
 
-```
+```text
 // NSArray
 @interface NSArray<__covariant ObjectType> : NSObject <NSCopying, NSMutableCopying, NSSecureCoding, NSFastEnumeration>
 
@@ -128,13 +126,13 @@ NSDictionary<NSString *, NSNumber *> *mapping = @{@"a": @1, @"b": @2};
 @end
 ```
 
-## Designated Initializer {#Designated-Initializer}
+## Designated Initializer <a id="Designated-Initializer"></a>
 
 Objective-C 中主要通过`NS_DESIGNATED_INITIALIZER`宏来实现指定构造器的。
 
 参考 UIViewController 的两个指定构造器：
 
-```
+```text
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 ```
@@ -147,6 +145,4 @@ Objective-C 中主要通过`NS_DESIGNATED_INITIALIZER`宏来实现指定构造�
 * 如果有多个Secondary initializers\(次要初始化器\)，它们之间可以任意调用，但最后必须指向Designated Initializer。在Secondary initializers内不能直接调用父类的初始化器。
 * 如果有多个不同数据源的Designated Initializer，那么不同数据源下的Designated Initializer应该调用相应的`[super (designated initializer)]`。如果父类没有实现相应的方法，则需要根据实际情况来决定是给父类补充一个新的方法还是调用父类其他数据源的Designated Initializer。比如UIView的`initWithCoder`调用的是NSObject的`init`。
 * 需要注意不同数据源下添加额外初始化动作的时机。
-
-
 

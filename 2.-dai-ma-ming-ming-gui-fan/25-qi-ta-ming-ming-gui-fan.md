@@ -1,6 +1,4 @@
-# 其它命名规范
-
----
+# 2.5. 其它命名规范
 
 ## **图片命名**
 
@@ -18,7 +16,7 @@
 
 **参考:**
 
-```
+```text
 UIImage *settingIcon = [UIImage imageNamed:@"icon_common_setting"];
 ```
 

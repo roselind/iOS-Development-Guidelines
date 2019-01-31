@@ -1,6 +1,4 @@
-# Swift编码规范
-
----
+# \* Swift编码规范
 
 ## **正确性 \(**Correctness**\)**
 
@@ -12,7 +10,7 @@
 
 推荐做法：
 
-```
+```text
 private let maximumWidgetCount = 100
 class WidgetContainer {
   var widgetButton: UIButton
@@ -22,7 +20,7 @@ class WidgetContainer {
 
 不推荐做法：
 
-```
+```text
 let MAX_WIDGET_COUNT = 100
 class app_widgetContainer {
   var wBut: UIButton
@@ -34,21 +32,21 @@ class app_widgetContainer {
 
 推荐：
 
-```
+```text
 let urlString:  URLString
 let userID:  UserID
 ```
 
 不推荐：
 
-```
+```text
 let uRLString:  UrlString
 let userId:  UserId
 ```
 
 对于函数和初始化方法，推荐对所有的参数进行有意义的命名，除非上下文已经非常清楚。如果外部参数命名可以使得函数调用更加可读，也应该把外部参数命名包含在内。
 
-```
+```text
 func dateFromString(dateString: String) -> NSDate
 func convertPointAt(#column: Int, #row: Int) -> CGPoint
 func timedAction(#delay: NSTimeInterval, perform action: SKAction) -> SKAction!
@@ -60,7 +58,7 @@ timedAction(delay: 1.0, perform: someOtherAction)
 
 对于方法来说，参照标准的苹果惯例，方法命名含义要引用到第一个参数：
 
-```
+```text
 class Guideline {
   func combineWithString(incoming: String, options: Dictionary?) { ... }
   func upvoteBy(amount: Int) { ... }
@@ -75,7 +73,7 @@ class Guideline {
 
 使用首字母大写的驼峰命名规则来命名枚举值：
 
-```
+```text
 enum Shape {
   case Rectangle
   case Square
@@ -98,7 +96,7 @@ enum Shape {
 
 当你遇到疑问时，可以看看Xcode在`jump bar`中是如何列出方法名的 —— 我们的风格与此匹配。
 
-[![](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/xcode-jump-bar.png "Methods in Xcode jump bar")](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/xcode-jump-bar.png)
+[![Methods in Xcode jump bar](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/xcode-jump-bar.png)](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/xcode-jump-bar.png)
 
 Methods in Xcode jump bar
 
@@ -106,7 +104,7 @@ Methods in Xcode jump bar
 
 Swift类型自动被模块名设置了名称空间，所以你不需要加一个类的前缀。如果两个来自不同模块的命名冲突了，你可以附加一个模块名到类型命名的前面来消除冲突。
 
-```
+```text
 import SomeModule
 let myClass = MyModule.UsefulClass()
 ```
@@ -117,25 +115,25 @@ let myClass = MyModule.UsefulClass()
 
 推荐：
 
-```
+```text
 func namePickerView(_ namePickerView: NamePickerView, didSelectName name: String)
 func namePickerViewShouldReload(_ namePickerView: NamePickerView) -> Bool
 ```
 
 不推荐：
 
-```
+```text
 func didSelectName(namePicker: NamePickerViewController, name: String)
 func namePickerShouldReload() -> Bool
 ```
 
 ### 泛型 \(Generics\)
 
-泛型类参数应具有描述性，遵守“大骆驼命名法”。如果一个参数名没有具体的含义，可以使用传统单大写字符，如T,  U, 或V等。
+泛型类参数应具有描述性，遵守“大骆驼命名法”。如果一个参数名没有具体的含义，可以使用传统单大写字符，如T, U, 或V等。
 
 推荐：
 
-```
+```text
 struct Stack<Element> { ... }
 func write<Target: OutputStream>(to target: inout Target)
 func swap<T>(_ a: inout T, _ b: inout T)
@@ -143,7 +141,7 @@ func swap<T>(_ a: inout T, _ b: inout T)
 
 不推荐：
 
-```
+```text
 struct Stack<T> { ... }
 func write<target: OutputStream>(to target: inout target)
 func swap<Thing>(_ a: inout Thing, _ b: inout Thing)
@@ -155,13 +153,13 @@ func swap<Thing>(_ a: inout Thing, _ b: inout Thing)
 
 推荐做法：
 
-```
+```text
 let color = "red"
 ```
 
 不推荐做法：
 
-```
+```text
 let colour = "red"
 ```
 
@@ -177,7 +175,7 @@ let colour = "red"
 
 推荐做法：
 
-```
+```text
 class MyViewcontroller: UIViewController {
   // class stuff here
 }
@@ -193,7 +191,7 @@ extension MyViewcontroller: UIScrollViewDelegate {
 
 不推荐做法：
 
-```
+```text
 class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
   // all methods
 }
@@ -209,7 +207,7 @@ class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDel
 
 推荐：
 
-```
+```text
 override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
   return Database.contacts.count
 }
@@ -217,7 +215,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 不推荐：
 
-```
+```text
 override func didReceiveMemoryWarning() {
   super.didReceiveMemoryWarning()
   // Dispose of any resources that can be recreated.
@@ -242,17 +240,16 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 * 使用2个空格的缩进比使用tabs更好，可以减少占用空间和帮助防止多次换行。确保在Xcode进行了下图的偏好设置：
 
-[![](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/indentation.png "Xcode indent settings")](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/indentation.png)
+[![Xcode indent settings](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/indentation.png)](https://github.com/raywenderlich/swift-style-guide/raw/master/screens/indentation.png)
 
 Xcode indent settings
 
 * 方法定义的大括号或者其他大括号（`if`/`else`/`switch`/`while`等）—— 般都放在定义名称的同一行，并且使用一个新的行来结束。
-
 * 提示：你可以通过以下方法重新进行缩进：选择一些代码（或者使用⌘A选择所有），然后按Control-I\(或者点击菜单栏 Editor\Structure\Re-Indent）。一些Xcode模板代码使用的缩进是4个空格，所以这种方法可以很好的修复缩进。
 
 推荐做法：
 
-```
+```text
 if user.isHappy {
   // Do something
 } else {
@@ -262,7 +259,7 @@ if user.isHappy {
 
 不推荐做法：
 
-```
+```text
 if user.isHappy
 {
     // Do something
@@ -277,7 +274,7 @@ else {
 
 推荐：
 
-```
+```text
 class TestDatabase: Database {
   var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
 }
@@ -285,16 +282,14 @@ class TestDatabase: Database {
 
 不推荐：
 
-```
+```text
 class TestDatabase : Database {
   var data :[String:CGFloat] = ["A" : 1.2, "B":3.2]
 }
 ```
 
 * 长行代码应该被限制在大约70个字符内。硬限制是故意不指定的。
-
 * 避免在每行的末尾留有空格。
-
 * 在每个文件的末尾添加一个换行符。
 
 ## 注释（Comments）
@@ -317,7 +312,7 @@ class TestDatabase : Database {
 
 以下是一个风格很好的类定义:
 
-```
+```text
 class Circle: Shape {
   var x: Int, y: Int
   var radius: Double
@@ -364,7 +359,7 @@ class Circle: Shape {
 
 必须使用`self`来区分构造器中属性命名和参数命名，还有在闭包表达式中引用属性值\(编译器需要区分\):
 
-```
+```text
 class BoardLocation {
   let row: Int, column: Int
   init(row: Int, column: Int) {
@@ -383,7 +378,7 @@ class BoardLocation {
 
 推荐做法：
 
-```
+```text
 var diameter: Double {
   return radius * 2
 }
@@ -391,7 +386,7 @@ var diameter: Double {
 
 不推荐做法：
 
-```
+```text
 var diameter: Double {
   get {
     return radius * 2
@@ -403,7 +398,7 @@ var diameter: Double {
 
 给那些不打算被继承的类使用`final` 修饰符， 例如:
 
-```
+```text
 // Turn any generic type into a reference type using this Box class.
 final class Box<T> {
   let value: T
@@ -417,7 +412,7 @@ final class Box<T> {
 
 保证短的函数定义在同一行中，并且包含左大括号：
 
-```
+```text
 func reticulateSplines(spline: [Double]) -> Bool {
   // reticulate code goes here
 }
@@ -425,7 +420,7 @@ func reticulateSplines(spline: [Double]) -> Bool {
 
 在一个长的函数定义时，在适当的地方进行换行，同时在下一行中添加一个额外的缩进：
 
-```
+```text
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
     translateConstant: Int, comment: String) -> Bool {
   // reticulate code goes here
@@ -438,7 +433,7 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 
 推荐做法：
 
-```
+```text
 UIView.animateWithDuration(1.0) {
   self.myView.alpha = 0
 }
@@ -454,7 +449,7 @@ UIView.animateWithDuration(1.0,
 
 不推荐做法：
 
-```
+```text
 UIView.animateWithDuration(1.0, animations: {
   self.myView.alpha = 0
 })
@@ -468,7 +463,7 @@ UIView.animateWithDuration(1.0,
 
 当单个闭包表达式上下文清晰时，使用隐式的返回值：
 
-```
+```text
 attendeeList.sort { a, b in
   a > b
 }
@@ -476,7 +471,7 @@ attendeeList.sort { a, b in
 
 链式方法使用尾随闭包会更清晰易读，至于如何使用空格，换行，还是使用命名和匿名参数不做具体要求。
 
-```
+```text
 let value = numbers.map { $0 * 2 }.filter { $0 % 3 == 0 }.index(of: 90)
 
 let value = numbers
@@ -491,14 +486,14 @@ let value = numbers
 
 推荐做法：
 
-```
+```text
 let width = 120.0                                    // Double
 let widthString = (width as NSNumber).stringValue    // String
 ```
 
 不推荐做法：
 
-```
+```text
 let width: NSNumber = 120.0                          // NSNumber
 let widthString: NSString = width.stringValue        // NSString
 ```
@@ -515,7 +510,7 @@ let widthString: NSString = width.stringValue        // NSString
 
 推荐：
 
-```
+```text
 enum Math {
   static let e = 2.718281828459045235360287
   static let root2 = 1.41421356237309504880168872
@@ -524,10 +519,10 @@ enum Math {
 let hypotenuse = side * Math.root2
 ```
 
-注意**: **使用枚举的好处是变量不会被无意初始化，且全局有效。  
+注意**:** 使用枚举的好处是变量不会被无意初始化，且全局有效。  
 不推荐：
 
-```
+```text
 let e = 2.718281828459045235360287  // pollutes global namespace
 let root2 = 1.41421356237309504880168872
 
@@ -546,13 +541,13 @@ let hypotenuse = side * root2 // what is root2?
 
 当你访问一个可选值时，如果只需要访问一次或者在可选值链中有多个可选值时，请使用可选值链：
 
-```
+```text
 self.textContainer?.textLabel?.setNeedsDisplay()
 ```
 
 当需要很方便的一次性拆包或者添加附加的操作时，请使用可选值绑定：
 
-```
+```text
 if let textContainer = self.textContainer {
   // do many things with textContainer
 }
@@ -564,7 +559,7 @@ if let textContainer = self.textContainer {
 
 推荐做法：
 
-```
+```text
 var subview: UIView?
 var volume: Double?
 // later on...
@@ -575,7 +570,7 @@ if let subview = subview, volume = volume {
 
 不推荐做法：
 
-```
+```text
 var optionalSubview: UIView?
 var volume: Double?
 if let unwrappedSubview = optionalSubview {
@@ -589,7 +584,7 @@ if let unwrappedSubview = optionalSubview {
 
 延迟初始化用来细致地控制对象的生命周期，这对于想实现延迟加载视图的UIViewController特别有用，你可以使用即时被调用闭包或私有构造方法：
 
-```
+```text
 lazy var locationManager: CLLocationManager = self.makeLocationManager()
 
 private func makeLocationManager() -> CLLocationManager {
@@ -604,7 +599,6 @@ private func makeLocationManager() -> CLLocationManager {
 **注意**：
 
 * `[unowned self]`在这里不是必须的，应为没有产生引用循环。
-
 * Location manager 的负面效果会弹出对话框要求用户提供权限，这是做延时加载的原因。
 
 ### 结构体构造器（Struct Initializers）
@@ -613,14 +607,14 @@ private func makeLocationManager() -> CLLocationManager {
 
 推荐做法：
 
-```
+```text
 let bounds = CGRect(x: 40, y: 20, width: 120, height: 80)
 let centerPoint = CGPoint(x: 96, y: 42)
 ```
 
 不推荐做法：
 
-```
+```text
 let bounds = CGRectMake(40, 20, 120, 80)
 let centerPoint = CGPointMake(96, 42)
 ```
@@ -633,7 +627,7 @@ let centerPoint = CGPointMake(96, 42)
 
 推荐做法：
 
-```
+```text
 let message = "Click the button"
 let currentBounds = computeViewBounds()
 var names = ["Mic", "Sam", "Christine"]
@@ -642,7 +636,7 @@ let maximumWidth: CGFloat = 106.5
 
 不推荐做法：
 
-```
+```text
 let message: String = "Click the button"
 let currentBounds: CGRect = computeViewBounds()
 let names = [String]()
@@ -654,14 +648,14 @@ let names = [String]()
 
 推荐：
 
-```
+```text
 var names: [String] = []
 var lookup: [String: Int] = [:]
 ```
 
 不推荐：
 
-```
+```text
 var names = [String]()
 var lookup = [String: Int]()
 ```
@@ -674,7 +668,7 @@ var lookup = [String: Int]()
 
 推荐做法：
 
-```
+```text
 var deviceModels: [String]
 var employees: [Int: String]
 var faxNumber: Int?
@@ -682,7 +676,7 @@ var faxNumber: Int?
 
 不推荐做法：
 
-```
+```text
 var deviceModels: Array<String>
 var employees: Dictionary<Int, String>
 var faxNumber: Optional<Int>
@@ -696,21 +690,21 @@ var faxNumber: Optional<Int>
 
 推荐:
 
-```
+```text
 let sorted = items.mergeSorted()  // easily discoverable
 rocket.launch()  // acts on the model
 ```
 
 不推荐：
 
-```
+```text
 let sorted = mergeSort(items)  // hard to discover
 launch(&rocket)
 ```
 
 自由函数：
 
-```
+```text
 let tuples = zip(a, b)  // feels natural as a free function (symmetry)
 let value = max(x, y, z)  // another free function that feels natural
 ```
@@ -725,7 +719,7 @@ let value = max(x, y, z)  // another free function that feels natural
 
 **推荐：**
 
-```
+```text
 resource.request().onComplete { [weak self] response in
   guard let strongSelf = self else {
     return
@@ -737,7 +731,7 @@ resource.request().onComplete { [weak self] response in
 
 不推荐：
 
-```
+```text
 // might crash if self is released before response returns
 resource.request().onComplete { [unowned self] response in
   let model = self.updateModel(response)
@@ -747,7 +741,7 @@ resource.request().onComplete { [unowned self] response in
 
 不推荐：
 
-```
+```text
 // deallocate could happen between updating the model and updating UI
 resource.request().onComplete { [weak self] response in
   let model = self?.updateModel(response)
@@ -757,13 +751,13 @@ resource.request().onComplete { [weak self] response in
 
 ## 访问控制 \(Access Control\)
 
-合理的使用`private` 和  `fileprivate`, 推荐使用`private`，在使用`extension`时可使用`fileprivate`。
+合理的使用`private` 和 `fileprivate`, 推荐使用`private`，在使用`extension`时可使用`fileprivate`。
 
-访问控制符一般放在属性修饰符的最前面. 除非需要使用 `static` 修饰符 ,`@IBAction`,  `@IBOutlet`或 `@discardableResult`。
+访问控制符一般放在属性修饰符的最前面. 除非需要使用 `static` 修饰符 ,`@IBAction`, `@IBOutlet`或 `@discardableResult`。
 
 推荐：
 
-```
+```text
 private let message = "Great Scott!"
 
 class TimeMachine {  
@@ -773,7 +767,7 @@ class TimeMachine {
 
 不推荐：
 
-```
+```text
 fileprivate let message = "Great Scott!"
 
 class TimeMachine {  
@@ -787,7 +781,7 @@ class TimeMachine {
 
 推荐做法：
 
-```
+```text
 for _ in 0..<3 {
   print("Hello three times")
 }
@@ -807,7 +801,7 @@ for index in (0...3).reversed() {
 
 不推荐做法：
 
-```
+```text
 var i = 0
 while i < 3 {
   print("Hello three times")
@@ -828,7 +822,7 @@ while i < attendeeList.count {
 当编码遇到条件判断时，左边的距离是黄金路径或幸福路径，因为路径越短，速度越快。不要嵌套`if`循环，多个返回语句是可以的。`guard` 就为此而生的。  
 推荐：
 
-```
+```text
 func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies {
 
   guard let context = context else {
@@ -845,7 +839,7 @@ func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies 
 
 不推荐：
 
-```
+```text
 func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies {
 
   if let context = context {
@@ -866,7 +860,7 @@ func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies 
 
 推荐：
 
-```
+```text
 guard let number1 = number1,
       let number2 = number2,
       let number3 = number3 else {
@@ -877,7 +871,7 @@ guard let number1 = number1,
 
 不推荐：
 
-```
+```text
 if let number1 = number1 {
   if let number2 = number2 {
     if let number3 = number3 {
@@ -907,13 +901,13 @@ Swift 不需要在你代码中的每一句表达式之后添加分号。只有�
 
 推荐做法：
 
-```
+```text
 let swift = "not a scripting language"
 ```
 
 不推荐做法：
 
-```
+```text
 let swift = "not a scripting language";
 ```
 
@@ -925,7 +919,7 @@ let swift = "not a scripting language";
 
 推荐：
 
-```
+```text
 if name == "Hello" {
   print("World")
 }
@@ -933,7 +927,7 @@ if name == "Hello" {
 
 不推荐：
 
-```
+```text
 if (name == "Hello") {
   print("World")
 }
@@ -941,7 +935,7 @@ if (name == "Hello") {
 
 在较大的表达式中，可选的括号有时可以使代码更清楚。
 
-```
+```text
 let playerMark = (player == current ? "X" : "O")
 ```
 
@@ -954,18 +948,15 @@ let playerMark = (player == current ? "X" : "O")
 /\*
 
 * Copyright \(c\) 2017 `Your Organization`
-* 
-* Permission is hereby granted, free of charge, to any person obtaining a copy
+* * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files \(the “Software”\), to deal
 * in the Software without restriction, including without limitation the rights
 * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 * copies of the Software, and to permit persons to whom the Software is
 * furnished to do so, subject to the following conditions:
-* 
-* The above copyright notice and this permission notice shall be included in
+* * The above copyright notice and this permission notice shall be included in
 * all copies or substantial portions of the Software.
-* 
-* THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* * THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
